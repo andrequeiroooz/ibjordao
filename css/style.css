@@ -1,0 +1,559 @@
+    /* =========================================
+   1. VARIÁVEIS DE COR E TIPOGRAFIA
+   ========================================= */
+:root {
+    /* Paleta de Cores */
+    --cor-primaria: #1b3a57;     /* Azul profundo */
+    --cor-destaque: #c0a070;     /* Dourado terroso */
+    --cor-fundo-claro: #eeeeee;  /* Branco / Off-white */
+    --cor-areia: #ede1ca;        /* Areia clara */
+    --cor-detalhes: #a5c9e8;     /* Azul claro */
+    --cor-texto: #333333;
+    
+    /* Tipografia */
+    --fonte-principal: 'Roboto Condensed', sans-serif;
+    --fonte-secundaria: 'Merriweather', serif;
+}
+
+/* =========================================
+   2. RESET E ESTILOS GLOBAIS (Mobile-First)
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Rolagem suave nativa para âncoras */
+}
+
+body {
+    font-family: var(--fonte-principal);
+    color: var(--cor-texto);
+    background-color: var(--cor-fundo-claro);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Classes Utilitárias */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--cor-destaque);
+    color: #ffffff;
+    padding: 0.8rem 1.8rem;
+    font-weight: 700;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #a88a5e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(192, 160, 112, 0.4);
+}
+
+.titulo-secao {
+    font-size: 2.2rem;
+    color: var(--cor-primaria);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.detalhe-linha {
+    width: 60px;
+    height: 3px;
+    background-color: var(--cor-destaque);
+    margin: 0 auto 2rem auto;
+}
+
+/* =========================================
+   3. CABEÇALHO (HEADER) E NAVEGAÇÃO
+   ========================================= */
+header {
+    background-color: var(--cor-fundo-claro);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.logo {
+    width: 200px;
+
+}
+
+
+.hamburger {
+    font-size: 1.8rem;
+    color: var(--cor-primaria);
+    cursor: pointer;
+    background: none;
+    border: none;
+    display: block;
+}
+
+.nav-menu {
+    display: none; /* Escondido por padrão no mobile */
+    width: 100%;
+    flex-direction: row;
+    text-align: center;
+    padding-top: 1rem;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Classe ativada pelo JavaScript */
+.nav-menu.active {
+    display: flex;
+}
+
+.nav-menu li {
+    margin: 0.5rem 0;
+}
+
+.nav-menu ul {
+    display: flex;
+    flex-direction: row; /* Coloca os links (Início, Sobre...) lado a lado */
+    list-style: none;    /* Remove as bolinhas da lista se houver */
+    padding: 0;
+    margin: 0;
+}
+
+.nav-menu a {
+    font-size: 20px;
+    font-weight: 700px;
+    color: var(--cor-primaria);
+    transition: color 0.3s ease;
+    display: block;
+    padding: 0.5rem;
+}
+
+.nav-menu a:hover {
+    color: var(--cor-destaque);
+}
+
+.btn-bemvindo {
+    margin-top: 1rem;
+}
+
+/* Desktop Header */
+@media (min-width: 992px) {
+    .hamburger { display: none; }
+    .nav-menu {
+        display: flex !important;
+        width: auto;
+        flex-direction: row;
+        align-items: center;
+        padding-top: 0;
+    }
+    .nav-menu li { margin: 0 1.5rem; }
+    .btn-bemvindo { margin-top: 0; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   4. SEÇÃO HERO (TOPO IMPACTANTE)
+   ========================================= */
+.hero {
+    position: relative;
+    height: 80vh;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(rgba(27, 58, 87, 0.85), rgba(27, 58, 87, 0.85)), 
+                url('https://images.unsplash.com/photo-1529070538774-1843cb1665e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    color: var(--cor-fundo-claro);
+    padding: 0 1rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.hero .frase-destaque {
+    font-family: var(--fonte-secundaria);
+    font-style: italic;
+    color: var(--cor-destaque);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .hero h1 { font-size: 4rem; }
+    .hero .frase-destaque { font-size: 1.6rem; }
+}
+
+/* =========================================
+   5. SEÇÃO SOBRE NÓS
+   ========================================= */
+.sobre {
+    padding: 5rem 0;
+    background-color: var(--cor-fundo-claro);
+}
+
+.sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.sobre-texto p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.simbolo-significado {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-left: 4px solid var(--cor-destaque);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+}
+
+.simbolo-significado h3 {
+    font-family: var(--fonte-secundaria);
+    color: var(--cor-primaria);
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 992px) {
+    .sobre-grid { grid-template-columns: 1fr 1fr; }
+    .titulo-secao { text-align: left; }
+    .detalhe-linha { margin-left: 0; }
+}
+
+/* =========================================
+   6. CULTOS E MINISTÉRIOS (CARDS)
+   ========================================= */
+/* --- SEÇÃO DE MINISTÉRIOS GERAL --- */
+.ministerios {
+    padding: 5rem 0;
+    background-color: #ffffff;
+}
+
+.ministerios .titulo-secao {
+    text-align: center;
+}
+
+.ministerios .detalhe-linha {
+    margin: 0 auto 3rem auto;
+}
+
+/* Grelha de Cards */
+.cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+/* --- ESTILIZAÇÃO DO CARD PREMIUM --- */
+.card {
+    background-color: var(--cor-areia);
+    padding: 3rem 2rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Efeito ao passar o mouse no Card */
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 35px rgba(27, 58, 87, 0.08);
+    background-color: #ffffff;
+    border-color: rgba(192, 160, 112, 0.2);
+}
+
+/* Círculo que envolve o ícone */
+.card-icon-container {
+    width: 70px;
+    height: 70px;
+    background-color: rgba(27, 58, 87, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: background-color 0.4s ease;
+}
+
+.card:hover .card-icon-container {
+    background-color: var(--cor-primaria);
+}
+
+/* Imagem do Ícone e Filtro de Cor Dourada */
+.card-icon-img {
+    height: 35px;
+    width: 35px;
+    object-fit: contain;
+    transition: filter 0.4s ease;
+    /* Pinta os ícones originalmente pretos de DOURADO automaticamente */
+    filter: invert(68%) sepia(16%) saturate(1065%) hue-rotate(354deg) brightness(88%) contrast(86%);
+}
+
+/* Quando passa o mouse no card, o ícone fica totalmente BRANCO */
+.card:hover .card-icon-img {
+    filter: invert(1) brightness(2) !important;
+}
+
+/* Título e Texto do Card */
+.card h3 {
+    color: var(--cor-primaria);
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    font-family: var(--fonte-secundaria);
+    font-weight: 700;
+}
+
+.card p {
+    color: #666666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Responsividade: Transforma em 3 colunas no computador */
+@media (min-width: 768px) {
+    .cards-grid { 
+        grid-template-columns: repeat(3, 1fr); 
+    }
+}/* =========================================
+   7. GALERIA
+   ========================================= */
+.galeria {
+    padding: 5rem 0;
+    background-color: var(--cor-fundo-claro);
+}
+
+.galeria-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.galeria-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    aspect-ratio: 4/3;
+}
+
+.galeria-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.galeria-item:hover img {
+    transform: scale(1.1);
+}
+
+@media (min-width: 600px) {
+    .galeria-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 992px) {
+    .galeria-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* =========================================
+   8. RODAPÉ (FOOTER)
+   ========================================= */
+footer {
+    background-color: var(--cor-primaria);
+    color: var(--cor-fundo-claro);
+    padding: 4rem 0 2rem 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-col h4 {
+    font-family: var(--fonte-secundaria);
+    color: var(--cor-destaque);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-contact-link {
+    text-decoration: none;
+    color: inherit; /* Faz o link herdar a cor padrão do texto do rodapé */
+    display: block;
+}
+
+/* Opcional: Efeito visual quando o usuário passar o mouse por cima do link */
+.footer-contact-link:hover p {
+    color: var(--cor-destaque); /* O texto e o alinhamento brilham na cor de destaque ao passar o mouse */
+    transition: color 0.3s ease;
+}
+/* Mantém o seu código anterior para os ícones */
+.footer-col p {
+    display: flex;
+    align-items: center; 
+    gap: 10px;           
+    color: var(--cor-detalhes);
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    cursor: pointer; /* Transforma a setinha do mouse na "mãozinha" de clique */
+}
+
+/* Controla o tamanho da imagem para seguir a fonte */
+.footer-icon {
+    height: 1.1em;      
+    width: 20px;        
+    object-fit: contain;
+}
+
+.footer-col a {
+    color: var(--cor-detalhes);
+    margin-bottom: 0.8rem;
+    display: block;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer-col a:hover {
+    color: var(--cor-destaque);
+}
+
+
+
+/* Container das redes sociais */
+.social-links {
+    display: flex;
+    flex-direction: column; 
+    gap: 0.8rem;
+}
+
+/* Alinhamento do link */
+.social-btn {
+    display: flex !important;
+    align-items: center;    
+    gap: 10px;              
+    color: var(--cor-detalhes);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.social-btn:hover {
+    color: var(--cor-destaque);
+}
+
+/* Controle e cor do ícone */
+.social-icon {
+    height: 1.1em;
+    width: 1.1em;
+    object-fit: contain;
+    display: inline-block;
+    /* O segredo está aqui: transforma o ícone preto em BRANCO */
+    filter: invert(1) brightness(2); 
+}
+
+/* Container da logo no rodapé */
+.footer-logo {
+    margin-bottom: 1.2rem;
+    display: flex;
+    justify-content: flex-start; /* Alinha a logo à esquerda */
+}
+
+/* Controla o tamanho e proporção da imagem da logo */
+.footer-logo-img {
+    height: 140px;          /* Altura ideal para a logo aparecer bem no rodapé */
+    width: auto;           /* Mantém a proporção correta para não amassar a logo */
+    object-fit: contain;   /* Garante que a imagem não sofra distorções */
+}
+/* Container do parágrafo: Alinha o ícone de data perfeitamente ao lado esquerdo do texto */
+.schedule-item {
+    display: flex !important;
+    align-items: center;    /* Centraliza verticalmente o ícone com a linha do texto */
+    gap: 10px;              /* Cria o espaço ideal entre o seu ícone e o texto */
+    color: var(--cor-detalhes);
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+/* Controla o tamanho do seu ícone 'img/data.png' e altera a cor para branco */
+.schedule-icon {
+    height: 1.1em;          /* Faz o ícone acompanhar o tamanho exato da sua fonte */
+    width: 1.1em;           /* Mantém a proporção quadrada perfeita */
+    object-fit: contain;
+    display: inline-block;
+    
+    /* 🌟 O SEGREDO: Transforma o seu ícone escuro em BRANCO para destacar no rodapé */
+}
+
+.copyright {
+    display: block;       /* Força o elemento a se comportar como um bloco completo */
+    width: 100%;          /* Garante que ele ocupe toda a largura da tela */
+    text-align: center;   /* Alinha o texto exatamente no centro horizontal */
+    padding-top: 2rem;
+    margin: 0 auto;       /* Centraliza o bloco na tela caso haja uma largura máxima definida */
+    border-top: 1px solid rgba(165, 201, 232, 0.2);
+    color: var(--cor-detalhes);
+    font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+    .footer-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 992px) {
+    .footer-grid { grid-template-columns: repeat(4, 1fr); }
+}
