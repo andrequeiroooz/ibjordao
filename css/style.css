@@ -1,4 +1,4 @@
-    /* =========================================
+/* =========================================
    1. VARIÁVEIS DE COR E TIPOGRAFIA
    ========================================= */
 :root {
@@ -16,7 +16,7 @@
 }
 
 /* =========================================
-   2. RESET E ESTILOS GLOBAIS (Mobile-First)
+   2. RESET E ESTILOS GLOBAIS
    ========================================= */
 * {
     margin: 0;
@@ -96,7 +96,7 @@ img {
    ========================================= */
 header {
     background-color: var(--cor-fundo-claro);
-    box-shadow: 0 2px 10px rgba(0,0,0,00.5rem);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -107,16 +107,15 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
-    flex-wrap: wrap;
+    position: relative;
 }
 
 .logo {
     width: 200px;
-
 }
 
-
 .hamburger {
+    margin: 20px;
     font-size: 1.8rem;
     color: var(--cor-primaria);
     cursor: pointer;
@@ -125,61 +124,97 @@ header {
     display: block;
 }
 
+/* Menu Oculto por padrão no Mobile */
 .nav-menu {
-    display: none; /* Escondido por padrão no mobile */
+    display: none; 
     width: 100%;
-    flex-direction: row;
-    text-align: center;
-    padding-top: 1rem;
-    animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Classe ativada pelo JavaScript */
-.nav-menu.active {
-    display: flex;
+/* AJUSTE MOBILE DE VERDADE: Ativado via classe do JS ou se injetar display flex */
+@media (max-width: 991px) {
+    .nav-menu.active,
+    .nav-menu.show,
+    .nav-menu[style*="display: flex"] {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center;
+        width: 100%;
+        background-color: #ffffff;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        padding: 1.5rem 0;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+        gap: 1rem;
+        z-index: 999;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .nav-menu ul {
+        display: flex;
+        flex-direction: column !important; /* Força empilhamento vertical */
+        align-items: center;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        gap: 1rem;
+    }
+
+    .nav-menu li {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+    }
+
+    .nav-menu a {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--cor-primaria);
+        display: block;
+        padding: 0.6rem;
+        width: 100%;
+    }
+
+    .btn-bemvindo {
+        width: 85%;
+        text-align: center;
+        margin-top: 0.5rem;
+        white-space: nowrap; /* Impede o botão de quebrar o texto no mobile */
+    }
 }
 
-.nav-menu li {
-    margin: 0.5rem 0;
-}
-
-.nav-menu ul {
-    display: flex;
-    flex-direction: row; /* Coloca os links (Início, Sobre...) lado a lado */
-    list-style: none;    /* Remove as bolinhas da lista se houver */
-    padding: 0;
-    margin: 0;
-}
-
-.nav-menu a {
-    font-size: 20px;
-    font-weight: 700px;
-    color: var(--cor-primaria);
-    transition: color 0.3s ease;
-    display: block;
-    padding: 0.5rem;
-}
-
-.nav-menu a:hover {
-    color: var(--cor-destaque);
-}
-
-.btn-bemvindo {
-    margin-top: 1rem;
-}
-
-/* Desktop Header */
+/* CONFIGURAÇÃO PARA COMPUTADOR (DESKTOP) */
 @media (min-width: 992px) {
-    .hamburger { display: none; }
+    .hamburger { 
+        display: none; 
+    }
+    
     .nav-menu {
         display: flex !important;
         width: auto;
         flex-direction: row;
         align-items: center;
-        padding-top: 0;
     }
-    .nav-menu li { margin: 0 1.5rem; }
-    .btn-bemvindo { margin-top: 0; }
+
+    .nav-menu ul {
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+    }
+    
+    .nav-menu li { 
+        margin: 0; 
+    }
+    
+    .nav-menu a {
+        font-size: 19px;
+        font-weight: 700;
+        padding: 0.5rem 1rem;
+    }
+
+    .btn-bemvindo { 
+        margin-top: 0; 
+    }
 }
 
 @keyframes fadeIn {
@@ -190,46 +225,140 @@ header {
 /* =========================================
    4. SEÇÃO HERO (TOPO IMPACTANTE)
    ========================================= */
+/* =========================================
+   4. SEÇÃO HERO (TOPO IMPACTANTE)
+   ========================================= */
 .hero {
     position: relative;
-    height: 80vh;
-    min-height: 500px;
+    background-color: #1b3a57;
+    min-height: auto;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: linear-gradient(rgba(27, 58, 87, 0.85), rgba(27, 58, 87, 0.85)), 
-                url('https://images.unsplash.com/photo-1529070538774-1843cb1665e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    overflow: hidden;
+    padding: 1.5rem 0; /* Espaçamento slim perfeito para o celular */
+    scroll-margin-top: 90px; 
 }
 
-.hero-content {
-    position: relative;
+.hero-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0; 
+    align-items: center;
+    width: 100%;
+}
+
+.hero-texto {
+    color: #ffffff;
     z-index: 10;
-    color: var(--cor-fundo-claro);
-    padding: 0 1rem;
 }
 
-.hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+/* 🌟 ESCONDE APENAS O TEXTO NO CELULAR */
+.hero-tagline,
+.hero h1,
+.hero .frase-destaque,
+.hero-info-cultos,
+.btn-hero {
+    display: none; 
 }
 
-.hero .frase-destaque {
-    font-family: var(--fonte-secundaria);
-    font-style: italic;
-    color: var(--cor-destaque);
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+/* Mantém a estilização do botão guardada para o computador */
+.btn-hero {
+    padding: 0.8rem 2rem;
+    background-color: #c5a880;
+    color: #1b3a57;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
 }
 
-@media (min-width: 768px) {
-    .hero h1 { font-size: 4rem; }
-    .hero .frase-destaque { font-size: 1.6rem; }
+.btn-hero:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    background-color: #d4b993;
 }
 
+/* --- CONFIGURAÇÃO DA IMAGEM PARA CELULAR (VISÍVEL E INTEIRA) --- */
+.hero-imagem-wrapper {
+    display: block !important; /* 🌟 GARANTE QUE A IMAGEM APAREÇA */
+    width: 100%;
+    height: 52vw; /* Altura proporcional para mostrar tudo sem cortar */
+    background-image: url('../img/topo2.png');
+    background-position: center center; 
+    background-size: contain; 
+    background-repeat: no-repeat;
+    border-radius: 12px;
+}
+
+/* =======================================================
+   🌟 AJUSTE EXCLUSIVO PARA COMPUTADORES (PC VOLTA AO NORMAL) 🌟
+   ======================================================= */
+@media (min-width: 992px) {
+    
+    /* 1. Restaura o tamanho gigante da Seção inteira no PC */
+    .hero {
+        min-height: 85vh;
+        padding: 4rem 0; 
+    }
+
+    .hero-container {
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 5rem;
+    }
+    
+    /* Restaura o visual original do PC com as FONTES GRANDES e alinhamentos */
+    .hero-tagline { 
+        display: block; 
+        font-size: 0.9rem;
+        color: #c5a880; 
+        font-weight: 600;
+        text-align: left;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+    
+    .hero h1 {
+        display: block; 
+        font-size: 4.2rem; /* Retorna a ser o título gigante */
+        font-weight: 800;
+        line-height: 1.15;
+        text-align: left;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero .frase-destaque { 
+        display: block; 
+        font-size: 1.2rem;
+        color: #e2ecf5;
+        opacity: 0.9;
+        text-align: left;
+        margin-bottom: 2rem;
+    }
+    
+    .hero-info-cultos { 
+        display: block; 
+        font-size: 1rem;
+        color: #c5a880;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-align: left;
+        margin-bottom: 2rem;
+    }
+    
+    .btn-hero { 
+        display: inline-block; 
+    }
+    
+    .hero-imagem-wrapper {
+        height: 500px;
+        background-position: right center; 
+        background-size: cover;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+}
 /* =========================================
    5. SEÇÃO SOBRE NÓS
    ========================================= */
@@ -267,36 +396,29 @@ header {
 
 @media (min-width: 992px) {
     .sobre-grid { grid-template-columns: 1fr 1fr; }
-    .titulo-secao { text-align: left; }
-    .detalhe-linha { margin-left: 0; }
+    .sobre .titulo-secao { text-align: left; }
+    .sobre .detalhe-linha { margin-left: 0; }
 }
 
 /* =========================================
    6. CULTOS E MINISTÉRIOS (CARDS)
    ========================================= */
-/* --- SEÇÃO DE MINISTÉRIOS GERAL --- */
 .ministerios {
     padding: 5rem 0;
     background-color: #ffffff;
     scroll-margin-top: 90px;
 }
 
-.ministerios .titulo-secao {
-    text-align: center;
+.ancora-cultos {
+    scroll-margin-top: 80px;
 }
 
-.ministerios .detalhe-linha {
-    margin: 0 auto 3rem auto;
-}
-
-/* Grelha de Cards */
 .cards-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
 }
 
-/* --- ESTILIZAÇÃO DO CARD PREMIUM --- */
 .card {
     background-color: var(--cor-areia);
     padding: 3rem 2rem;
@@ -310,7 +432,6 @@ header {
     align-items: center;
 }
 
-/* Efeito ao passar o mouse no Card */
 .card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 35px rgba(27, 58, 87, 0.08);
@@ -318,7 +439,6 @@ header {
     border-color: rgba(192, 160, 112, 0.2);
 }
 
-/* Círculo que envolve o ícone */
 .card-icon-container {
     width: 70px;
     height: 70px;
@@ -335,22 +455,18 @@ header {
     background-color: var(--cor-primaria);
 }
 
-/* Imagem do Ícone e Filtro de Cor Dourada */
 .card-icon-img {
     height: 35px;
     width: 35px;
     object-fit: contain;
     transition: filter 0.4s ease;
-    /* Pinta os ícones originalmente pretos de DOURADO automaticamente */
     filter: invert(68%) sepia(16%) saturate(1065%) hue-rotate(354deg) brightness(88%) contrast(86%);
 }
 
-/* Quando passa o mouse no card, o ícone fica totalmente BRANCO */
 .card:hover .card-icon-img {
     filter: invert(1) brightness(2) !important;
 }
 
-/* Título e Texto do Card */
 .card h3 {
     color: var(--cor-primaria);
     font-size: 1.4rem;
@@ -365,32 +481,22 @@ header {
     line-height: 1.6;
 }
 
-/* Responsividade: Transforma em 3 colunas no computador */
 @media (min-width: 768px) {
     .cards-grid { 
         grid-template-columns: repeat(3, 1fr); 
     }
-}/* =========================================
-   7. GALERIA
+}
+
+/* =========================================
+   7. GALERIA (CARROSSEL INFINITO)
    ========================================= */
-/* --- SEÇÃO GALERIA --- */
 .galeria {
     padding: 5rem 0;
     background-color: var(--cor-fundo-claro);
     scroll-margin-top: 90px;
-    overflow: hidden; /* Esconde as fotos que saem da tela nas laterais */
+    overflow: hidden;
 }
 
-/* Título centralizado pelo CSS */
-.galeria .titulo-secao {
-    text-align: center;
-}
-
-.galeria .detalhe-linha {
-    margin: 0 auto 3rem auto;
-}
-
-/* Janela visível do carrossel */
 .carrossel-container {
     width: 100%;
     overflow: hidden;
@@ -398,26 +504,23 @@ header {
     padding: 1rem 0;
 }
 
-/* Esteira que segura todas as fotos lado a lado e se move */
 .carrossel-track {
     display: flex;
-    width: max-content; /* Permite que a linha se estenda para fora da tela */
-    gap: 1.5rem; /* Espaço entre as fotos */
-    animation: rolagem-infinita 50s linear infinite; /* Move sozinho. Altere '25s' para ir mais rápido ou devagar */
+    width: max-content;
+    gap: 1.5rem;
+    animation: rolagem-infinita 50s linear infinite;
 }
 
 
 
-/* Definições de tamanho de cada foto individual */
 .galeria-item {
     position: relative;
     overflow: hidden;
-    border-radius: 12px; /* Bordas arredondadas modernas */
+    border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    /* Tamanho fixo para os itens do carrossel ficarem bonitos */
     width: 280px;
-    height: 210px; /* Mantém a proporção de aspecto próxima de 4/3 */
-    flex-shrink: 0; /* Impede o flexbox de esmagar as fotos */
+    height: 210px;
+    flex-shrink: 0;
 }
 
 .galeria-item img {
@@ -427,12 +530,10 @@ header {
     transition: transform 0.5s ease;
 }
 
-/* Zoom suave quando passa o mouse individualmente na foto */
 .galeria-item:hover img {
     transform: scale(1.08);
 }
 
-/* Ajustes para telas maiores (tamanho das fotos aumenta no computador) */
 @media (min-width: 992px) {
     .galeria-item {
         width: 360px;
@@ -440,15 +541,9 @@ header {
     }
 }
 
-/* --- ANIMAÇÃO MATEMÁTICA DO LOOP INFINITO --- */
 @keyframes rolagem-infinita {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        /* Move exatamente metade da largura total da esteira (por causa dos itens duplicados) */
-        transform: translateX(calc(-50% - 0.75rem)); 
-    }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 0.75rem)); }
 }
 
 /* =========================================
@@ -476,16 +571,15 @@ footer {
 
 .footer-contact-link {
     text-decoration: none;
-    color: inherit; /* Faz o link herdar a cor padrão do texto do rodapé */
+    color: inherit;
     display: block;
 }
 
-/* Opcional: Efeito visual quando o usuário passar o mouse por cima do link */
 .footer-contact-link:hover p {
-    color: var(--cor-destaque); /* O texto e o alinhamento brilham na cor de destaque ao passar o mouse */
+    color: var(--cor-destaque);
     transition: color 0.3s ease;
 }
-/* Mantém o seu código anterior para os ícones */
+
 .footer-col p {
     display: flex;
     align-items: center; 
@@ -493,10 +587,8 @@ footer {
     color: var(--cor-detalhes);
     font-size: 1.1rem;
     margin-bottom: 0.8rem;
-    cursor: pointer; /* Transforma a setinha do mouse na "mãozinha" de clique */
 }
 
-/* Controla o tamanho da imagem para seguir a fonte */
 .footer-icon {
     height: 1.1em;      
     width: 20px;        
@@ -515,22 +607,17 @@ footer {
     color: var(--cor-destaque);
 }
 
-
-
-/* Container das redes sociais */
 .social-links {
     display: flex;
     flex-direction: column; 
     gap: 0.8rem;
 }
 
-/* Alinhamento do link */
 .social-btn {
     display: flex !important;
     align-items: center;    
     gap: 10px;              
     color: var(--cor-detalhes);
-    text-decoration: none;
     font-size: 1rem;
     transition: color 0.3s ease;
 }
@@ -539,55 +626,50 @@ footer {
     color: var(--cor-destaque);
 }
 
-/* Controle e cor do ícone */
 .social-icon {
     height: 1.1em;
     width: 1.1em;
     object-fit: contain;
     display: inline-block;
-    /* O segredo está aqui: transforma o ícone preto em BRANCO */
     filter: invert(1) brightness(2); 
 }
 
-/* Container da logo no rodapé */
 .footer-logo {
     margin-bottom: 1.2rem;
     display: flex;
-    justify-content: flex-start; /* Alinha a logo à esquerda */
+    justify-content: flex-start;
 }
 
-/* Controla o tamanho e proporção da imagem da logo */
 .footer-logo-img {
-    height: 140px;          /* Altura ideal para a logo aparecer bem no rodapé */
-    width: auto;           /* Mantém a proporção correta para não amassar a logo */
-    object-fit: contain;   /* Garante que a imagem não sofra distorções */
+    height: 140px;          
+    width: auto;           
+    object-fit: contain;   
 }
-/* Container do parágrafo: Alinha o ícone de data perfeitamente ao lado esquerdo do texto */
+
 .schedule-item {
     display: flex !important;
-    align-items: center;    /* Centraliza verticalmente o ícone com a linha do texto */
-    gap: 10px;              /* Cria o espaço ideal entre o seu ícone e o texto */
+    align-items: center;    
+    gap: 10px;              
     color: var(--cor-detalhes);
     font-size: 1rem;
     margin-bottom: 0.8rem;
+    background: transparent !important; /* Garante que não haverá blocos de fundo */
 }
 
-/* Controla o tamanho do seu ícone 'img/data.png' e altera a cor para branco */
 .schedule-icon {
-    height: 1.1em;          /* Faz o ícone acompanhar o tamanho exato da sua fonte */
-    width: 1.1em;           /* Mantém a proporção quadrada perfeita */
+    height: 1.2em;          
+    width: 1.2em;           
     object-fit: contain;
     display: inline-block;
-    
-    /* 🌟 O SEGREDO: Transforma o seu ícone escuro em BRANCO para destacar no rodapé */
+    background: transparent !important;
 }
 
 .copyright {
-    display: block;       /* Força o elemento a se comportar como um bloco completo */
-    width: 100%;          /* Garante que ele ocupe toda a largura da tela */
-    text-align: center;   /* Alinha o texto exatamente no centro horizontal */
+    display: block;       
+    width: 100%;          
+    text-align: center;   
     padding-top: 2rem;
-    margin: 0 auto;       /* Centraliza o bloco na tela caso haja uma largura máxima definida */
+    margin: 0 auto;       
     border-top: 1px solid rgba(165, 201, 232, 0.2);
     color: var(--cor-detalhes);
     font-size: 0.9rem;
