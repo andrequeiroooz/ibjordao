@@ -373,23 +373,51 @@ header {
 }/* =========================================
    7. GALERIA
    ========================================= */
+/* --- SEÇÃO GALERIA --- */
 .galeria {
     padding: 5rem 0;
     background-color: var(--cor-fundo-claro);
     scroll-margin-top: 90px;
+    overflow: hidden; /* Esconde as fotos que saem da tela nas laterais */
 }
 
-.galeria-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
+/* Título centralizado pelo CSS */
+.galeria .titulo-secao {
+    text-align: center;
 }
 
+.galeria .detalhe-linha {
+    margin: 0 auto 3rem auto;
+}
+
+/* Janela visível do carrossel */
+.carrossel-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 1rem 0;
+}
+
+/* Esteira que segura todas as fotos lado a lado e se move */
+.carrossel-track {
+    display: flex;
+    width: max-content; /* Permite que a linha se estenda para fora da tela */
+    gap: 1.5rem; /* Espaço entre as fotos */
+    animation: rolagem-infinita 50s linear infinite; /* Move sozinho. Altere '25s' para ir mais rápido ou devagar */
+}
+
+
+
+/* Definições de tamanho de cada foto individual */
 .galeria-item {
     position: relative;
     overflow: hidden;
-    border-radius: 8px;
-    aspect-ratio: 4/3;
+    border-radius: 12px; /* Bordas arredondadas modernas */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    /* Tamanho fixo para os itens do carrossel ficarem bonitos */
+    width: 280px;
+    height: 210px; /* Mantém a proporção de aspecto próxima de 4/3 */
+    flex-shrink: 0; /* Impede o flexbox de esmagar as fotos */
 }
 
 .galeria-item img {
@@ -399,16 +427,28 @@ header {
     transition: transform 0.5s ease;
 }
 
+/* Zoom suave quando passa o mouse individualmente na foto */
 .galeria-item:hover img {
-    transform: scale(1.1);
+    transform: scale(1.08);
 }
 
-@media (min-width: 600px) {
-    .galeria-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
+/* Ajustes para telas maiores (tamanho das fotos aumenta no computador) */
 @media (min-width: 992px) {
-    .galeria-grid { grid-template-columns: repeat(4, 1fr); }
+    .galeria-item {
+        width: 360px;
+        height: 270px;
+    }
+}
+
+/* --- ANIMAÇÃO MATEMÁTICA DO LOOP INFINITO --- */
+@keyframes rolagem-infinita {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Move exatamente metade da largura total da esteira (por causa dos itens duplicados) */
+        transform: translateX(calc(-50% - 0.75rem)); 
+    }
 }
 
 /* =========================================
